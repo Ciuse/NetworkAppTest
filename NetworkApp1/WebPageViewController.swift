@@ -9,19 +9,23 @@ import UIKit
 import WebKit
 
 class WebPageViewController: UIViewController, WKNavigationDelegate {
+    @IBOutlet private weak var wkFeedNews: WKWebView!
     
-    @IBOutlet weak var wkFeedNews: WKWebView!
     var urlFeedNews: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        wkFeedNews.navigationDelegate = self
+       // wkFeedNews.navigationDelegate = self
         
         if let urlFeedNews = urlFeedNews {
             let url = URL(string: urlFeedNews)!
             let urlRequest = URLRequest(url: url)
+            
             wkFeedNews.load(urlRequest)
+            
+        } else {
+            
         }
     }
 

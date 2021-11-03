@@ -20,6 +20,7 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         dataManger.fetchAndReload {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -28,9 +29,9 @@ class MainViewController: UIViewController {
     }
 }
 
-extension MainViewController: UITableViewDataSource{
+extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataManger.numberOfItems() ?? 0
+        return dataManger.numberOfItems()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -41,8 +42,10 @@ extension MainViewController: UITableViewDataSource{
     }
 }
 
-extension MainViewController: UITableViewDelegate{
+extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.delegate?.tableView?(tableView, didDeselectRowAt: indexPath)
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vcWebPage = storyboard.instantiateViewController(withIdentifier: "WebPageViewControllerId") as! WebPageViewController
         let navController = self.navigationController

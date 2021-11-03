@@ -11,12 +11,12 @@ class DataManager {
     fileprivate var dataManager = NetwkorkMisc()
     fileprivate var items: [FeedModelItem]?
     
-    func fetchAndReload (callBack: @escaping () -> Void) {
+    func fetchAndReload(completion: @escaping () -> Void) {
         dataManager.getDataFrom(dataUrl: URL(string: "https://feeds.npr.org/1004/feed.json")!) { result in
             switch result {
             case .success(let data):
                 self.items = data?.items
-                callBack()
+                
             case .failure(let error):
                 switch error {
                 case .httpStatusNotValid:
@@ -29,14 +29,19 @@ class DataManager {
                     print("error:\(e)")
                 }
             }
+            completion()
         }
     }
     
-    func numberOfItems() -> Int? {
-        items?.count
+    func numberOfItems() -> Int {
+        items?.count ?? 0
     }
     
     func getItem(at index: IndexPath) -> FeedModelItem? {
-        items?[index.item]
+        if index.row < 0 || index.row >= numberOfItems() {
+            return nil
+        }
+        
+        return items?[index.row]
     }
 }
