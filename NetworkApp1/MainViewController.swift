@@ -8,18 +8,29 @@
 import UIKit
 
 class MainViewController: UIViewController {
+    
+    @IBOutlet weak var tableView: UITableView! {
+        didSet {
+            tableView.delegate = self
+            tableView.dataSource = self
+        }
+    }
+    
     let dataManger = DataManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        dataManger.fetchAndReload {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
     }
-    
 }
 
 extension MainViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        dataManger.numberOfItems() ?? 0
+        return dataManger.numberOfItems() ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -28,10 +39,18 @@ extension MainViewController: UITableViewDataSource{
         cell.configure(indexPath: indexPath, item: item)
         return cell
     }
-    
-    
 }
 
 extension MainViewController: UITableViewDelegate{
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vcWebPage = storyboard.instantiateViewController(withIdentifier: "WebPageViewControllerId") as! WebPageViewController
+        let navController = self.navigationController
+        
+        vcWebPage.urlFeedNews = dataManger.getItem(at: indexPath)?.url
+        
+        navController?.pushViewController(vcWebPage, animated: true)
+    }
 }
+
+

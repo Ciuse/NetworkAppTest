@@ -39,13 +39,14 @@ class FeedNewsTableViewCell: UITableViewCell {
         lblTitle.text = item.title
         lblSummary.text = item.summary
         lblAuthor.text = item.author?.name
-        if let imageUrl = item.url {
+        if let imageUrl = item.image {
             DispatchQueue.global().async {
                 if let url = URL(string: imageUrl) {
                     let data = try? Data(contentsOf: url)
                     if let imageData = data {
                         DispatchQueue.main.async {
                             self.imgFeed.image = UIImage(data: imageData)
+                            print(imageUrl)
                         }
                     }
                 }

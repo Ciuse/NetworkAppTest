@@ -11,12 +11,12 @@ class DataManager {
     fileprivate var dataManager = NetwkorkMisc()
     fileprivate var items: [FeedModelItem]?
     
-    func fetch () {
+    func fetchAndReload (callBack: @escaping () -> Void) {
         dataManager.getDataFrom(dataUrl: URL(string: "https://feeds.npr.org/1004/feed.json")!) { result in
             switch result {
             case .success(let data):
                 self.items = data?.items
-                
+                callBack()
             case .failure(let error):
                 switch error {
                 case .httpStatusNotValid:

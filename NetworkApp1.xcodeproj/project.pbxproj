@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B7065CDC2732CBA400E5E946 /* WebPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7065CDB2732CBA400E5E946 /* WebPageViewController.swift */; };
 		B793684627329D56001D814D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B793684527329D56001D814D /* AppDelegate.swift */; };
 		B793684827329D56001D814D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B793684727329D56001D814D /* SceneDelegate.swift */; };
 		B793684A27329D56001D814D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B793684927329D56001D814D /* MainViewController.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B7065CDB2732CBA400E5E946 /* WebPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPageViewController.swift; sourceTree = "<group>"; };
 		B793684227329D56001D814D /* NetworkApp1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NetworkApp1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B793684527329D56001D814D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B793684727329D56001D814D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -46,7 +48,6 @@
 		B793683927329D56001D814D = {
 			isa = PBXGroup;
 			children = (
-				B793685E2732AD95001D814D /* DataManager.swift */,
 				B793685927329D6A001D814D /* Network */,
 				B793684427329D56001D814D /* NetworkApp1 */,
 				B793684327329D56001D814D /* Products */,
@@ -64,10 +65,11 @@
 		B793684427329D56001D814D /* NetworkApp1 */ = {
 			isa = PBXGroup;
 			children = (
-				B793685C2732A1C5001D814D /* FeedNewsTableViewCell.swift */,
 				B793684527329D56001D814D /* AppDelegate.swift */,
 				B793684727329D56001D814D /* SceneDelegate.swift */,
 				B793684927329D56001D814D /* MainViewController.swift */,
+				B7065CDB2732CBA400E5E946 /* WebPageViewController.swift */,
+				B793685C2732A1C5001D814D /* FeedNewsTableViewCell.swift */,
 				B793684B27329D56001D814D /* Main.storyboard */,
 				B793684E27329D59001D814D /* Assets.xcassets */,
 				B793685027329D59001D814D /* LaunchScreen.storyboard */,
@@ -79,6 +81,7 @@
 		B793685927329D6A001D814D /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				B793685E2732AD95001D814D /* DataManager.swift */,
 				B793685A27329D93001D814D /* NetworkMisc.swift */,
 			);
 			path = Network;
@@ -161,6 +164,7 @@
 				B793685D2732A1C5001D814D /* FeedNewsTableViewCell.swift in Sources */,
 				B793685B27329D93001D814D /* NetworkMisc.swift in Sources */,
 				B793684827329D56001D814D /* SceneDelegate.swift in Sources */,
+				B7065CDC2732CBA400E5E946 /* WebPageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
