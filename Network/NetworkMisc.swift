@@ -29,7 +29,7 @@ struct FeedModelItem: Decodable {
     let author: FeedModelAuthor?
 }
 
-class NetwkorkMisc {
+class NetworkManager {
     func getDataFrom(dataUrl url: URL, completion: @escaping (Result<FeedModel?, MyError>) -> Void) {
         let session = URLSession.shared
         

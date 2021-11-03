@@ -21,6 +21,10 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        dataManger.configure { title, message in
+            self.showAlert(allertTitle: title, allertMessage: message)
+        }
+        
         dataManger.fetchAndReload {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -47,12 +51,23 @@ extension MainViewController: UITableViewDelegate {
         tableView.delegate?.tableView?(tableView, didDeselectRowAt: indexPath)
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vcWebPage = storyboard.instantiateViewController(withIdentifier: "WebPageViewControllerId") as! WebPageViewController
+        let vcWebPage = storyboard.instantiateViewController(withIdentifier: WebPageViewController.viewControllerIdentify) as! WebPageViewController
         let navController = self.navigationController
         
         vcWebPage.urlFeedNews = dataManger.getItem(at: indexPath)?.url
         
         navController?.pushViewController(vcWebPage, animated: true)
+    }
+}
+
+extension MainViewController {
+    private func showAlert(allertTitle tile: String, allertMessage message: String) {
+        DispatchQueue.main.async{
+            let alertController = UIAlertController(title: tile, message: message, preferredStyle:.alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
+        }
     }
 }
 
