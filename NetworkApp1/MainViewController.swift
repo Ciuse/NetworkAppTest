@@ -21,13 +21,17 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        dataManger.configure { title, message in
-            self.showAlert(allertTitle: title, allertMessage: message)
-        }
+        //        dataManger.configure { title, message in
+        //            self.showAlert(allertTitle: title, allertMessage: message)
+        //        }
         
-        dataManger.fetchAndReload {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
+        dataManger.fetch { error in
+            if error == nil{
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            } else {
+                self.handleError(error: error!)
             }
         }
     }
@@ -61,6 +65,20 @@ extension MainViewController: UITableViewDelegate {
 }
 
 extension MainViewController {
+    
+    private func handleError (error: MyError) {
+        switch error {
+           case .httpStatusNotValid:
+            showAlert(allertTitle: "Error Http Status Not Valid", allertMessage: error.localizedDescription)
+       
+           case .noData:
+            showAlert(allertTitle: "Error No Data", allertMessage: error.localizedDescription)
+       
+           case .jsonError(let e):
+            showAlert(allertTitle: "Error", allertMessage: e)
+           }
+    }
+    
     private func showAlert(allertTitle tile: String, allertMessage message: String) {
         DispatchQueue.main.async{
             let alertController = UIAlertController(title: tile, message: message, preferredStyle:.alert)
